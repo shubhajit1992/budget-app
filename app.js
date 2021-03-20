@@ -12,5 +12,24 @@ var uiController = (function () {
 
 // GLOBAL APP CONTROLLER
 var appController = (function (budgetCtrl, uiCtrl) {
+    var ctrlAddItem = function () {
+        // 1. Get the field input data
 
+        // 2. Add the item to the budget controller
+
+        // 3. Add the item to the UI
+
+        // 4. Clear the fields
+
+        // 5. Calculate and update budget
+        console.log('It works');
+    };
+
+    document.querySelector('.add__btn').addEventListener('click', ctrlAddItem);
+
+    document.addEventListener('keydown', function (event) {
+        if (event.code === 'Enter' || event.key === 'Enter') {
+            ctrlAddItem();
+        }
+    });
 })(budgetController, uiController);
