@@ -2,7 +2,33 @@
 
 // BUDGET CONTROLLER
 var budgetController = (function () {
+    var Expense = function (id, description, value) {
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
 
+    var Income = function (id, description, value) {
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
+
+    /* var allExpenses = [];
+    var allIncomes = [];
+    var totalExpenses = 0;
+    var totalIncomes = 0; */
+
+    var data = {
+        allItems: {
+            expense: [],
+            income: []
+        },
+        totals: {
+            expense: 0,
+            income: 0
+        }
+    }
 })();
 
 // UI CONTROLLER
