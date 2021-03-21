@@ -179,6 +179,12 @@ var uiController = (function () {
         return (type === 'expense' ? '-' : '+') + ' ' + integer + '.' + decimal;
     };
 
+    var nodeListForEach = function (nodeList, callback) {
+        for (var i = 0; i < nodeList.length; i++) {
+            callback(nodeList[i], i);
+        }
+    };
+
     return {
         getInput: function () {
             return {
@@ -249,12 +255,6 @@ var uiController = (function () {
         displayPercentage: function (percentages) {
             var fields = document.querySelectorAll(DOMStrings.expensePercentageLabel);
 
-            var nodeListForEach = function (nodeList, callback) {
-                for (var i = 0; i < nodeList.length; i++) {
-                    callback(nodeList[i], i);
-                }
-            };
-
             nodeListForEach(fields, function (currentElement, index) {
                 if (percentages[index] > 0) {
                     currentElement.textContent = percentages[index] + '%';
@@ -273,6 +273,20 @@ var uiController = (function () {
             year = now.getFullYear();
 
             document.querySelector(DOMStrings.dateLabel).textContent = months[month] + ' ' + year;
+        },
+
+        changeType: function () {
+            var fields = document.querySelectorAll(
+                DOMStrings.inputType + ',' +
+                DOMStrings.inputDescription + ',' +
+                DOMStrings.inputValue
+            );
+
+            nodeListForEach(fields, function (currentElement) {
+                currentElement.classList.toggle('red-focus');
+            });
+
+            document.querySelector(DOMStrings.inputButton).classList.toggle('red');
         },
 
         getDOMStrings: function () {
@@ -295,6 +309,8 @@ var appController = (function (budgetCtrl, uiCtrl) {
         });
 
         document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
+
+        document.querySelector(DOM.inputType).addEventListener('change', uiCtrl.changeType);
     };
 
     var updateBudget = function () {
